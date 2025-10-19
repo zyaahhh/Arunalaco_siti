@@ -4,7 +4,9 @@
   <div class="content-header">
     <div class="container-fluid">
       <h1 class="m-0">Data Penjualan</h1>
-      <a href="{{ route('penjualan.create') }}" class="btn btn-primary mt-2">Tambah Penjualan</a>
+      <a href="{{ route('penjualan.create') }}" class="btn btn-primary mt-2">
+        <i class="fas fa-plus"></i> Tambah Penjualan
+      </a>
     </div>
   </div>
 
@@ -36,12 +38,18 @@
                 <td>{{ $p->diskon }}%</td>
                 <td>Rp {{ number_format($p->total, 0, ',', '.') }}</td>
                 <td>
-                  <a href="{{ route('penjualan.cetak', $p->id) }}" target="_blank" class="btn btn-success btn-sm">Cetak Struk</a>
-                  <a href="{{ route('penjualan.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="{{ route('penjualan.cetak', $p->id) }}" target="_blank" class="btn btn-success btn-sm">
+                    <i class="fas fa-print"></i> Cetak Struk
+                  </a>
+                  <a href="{{ route('penjualan.edit', $p->id) }}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Edit
+                  </a>
                   <form action="{{ route('penjualan.destroy', $p->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini?')">Hapus</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini?')">
+                      <i class="fas fa-trash-alt"></i> Hapus
+                    </button>
                   </form>
                 </td>
               </tr>
