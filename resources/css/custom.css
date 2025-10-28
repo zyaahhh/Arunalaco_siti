@@ -1,0 +1,130 @@
+/* === 💜 FINAL DARK PURPLE THEME (NO WHITE / NO HOVER / NO SHADOW) === */
+
+/* --- SIDEBAR --- */
+.sidebar {
+  background-color: #2a1b47 !important; /* Ungu gelap */
+  color: #cbb4ff !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.sidebar .nav,
+.sidebar .nav .nav-item {
+  background: #2a1b47 !important;
+  background-image: none !important;
+  border: none !important;
+}
+
+/* Semua link sidebar */
+.sidebar .nav .nav-item .nav-link {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #cbb4ff !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+  outline: none !important;
+  text-shadow: none !important;
+}
+
+/* Hapus efek hover, active, dan fokus */
+.sidebar .nav .nav-item .nav-link:hover,
+.sidebar .nav .nav-item .nav-link:focus,
+.sidebar .nav .nav-item .nav-link:active,
+.sidebar .nav .nav-item.active > .nav-link {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #cbb4ff !important;
+  box-shadow: none !important;
+  filter: none !important;
+  outline: none !important;
+}
+
+/* Warna ikon & teks */
+.sidebar .nav .nav-item .nav-link i,
+.sidebar .nav .nav-item .nav-link span {
+  color: #cbb4ff !important;
+  text-shadow: none !important;
+}
+
+/* Matikan pseudo-element nakal */
+.sidebar .nav .nav-item .nav-link::before,
+.sidebar .nav .nav-item .nav-link::after,
+.sidebar .nav .nav-item::before,
+.sidebar .nav .nav-item::after,
+.sidebar::before,
+.sidebar::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Kadang ada style inline dari JS template */
+.sidebar .nav .nav-item .nav-link[style],
+.sidebar .nav .nav-item.active[style] {
+  background: transparent !important;
+  color: #cbb4ff !important;
+}
+
+/* Hapus efek collapse highlight */
+.sidebar .collapse,
+.sidebar .collapse.show,
+.sidebar .nav .nav-item .nav-link[data-toggle="collapse"]:hover {
+  background: transparent !important;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  background-color: #3b2169 !important;
+  color: #cbb4ff !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.navbar .nav-item .nav-link {
+  color: #cbb4ff !important;
+  background: transparent !important;
+  transition: none !important;
+}
+.navbar .nav-item .nav-link:hover {
+  color: #cbb4ff !important;
+}
+
+/* --- FOOTER --- */
+.footer {
+  background-color: #2a1b47 !important;
+  color: #cbb4ff !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* --- GLOBAL --- */
+body {
+  background-color: #2a1b47 !important;
+  color: #cbb4ff !important;
+  box-shadow: none !important;
+}
+
+/* Hapus semua bayangan & fokus putih */
+* {
+  box-shadow: none !important;
+  outline: none !important;
+  text-shadow: none !important;
+}
+
+/* Scrollbar ungu */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #5b2fa3;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #8e24aa;
+}

@@ -1,0 +1,141 @@
+/* ================================
+   🌙 DARK PURPLE ELEGANT THEME
+   By: Arunala & Co
+   ================================ */
+
+/* === GLOBAL BACKGROUND === */
+body {
+  background-color: #f6f3fa !important;
+  font-family: "Poppins", sans-serif;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  background: linear-gradient(180deg, #2c1a47 0%, #24103e 100%) !important;
+  color: #d1c4e9 !important;
+  border-right: 1px solid #3e2a64;
+}
+
+.sidebar .sidebar-brand-wrapper,
+.sidebar .sidebar-brand {
+  background-color: #2c1a47 !important;
+  color: #ffffff !important;
+}
+
+.sidebar .user-profile {
+  background-color: #2c1a47 !important;
+  border-bottom: 1px solid #3e2a64 !important;
+}
+
+.sidebar .user-profile .user-name,
+.sidebar .user-profile .designation {
+  color: #e0d3ff !important;
+}
+
+/* === NAV ITEMS === */
+.sidebar .nav {
+  background-color: transparent !important;
+}
+
+.sidebar .nav .nav-item .nav-link {
+  color: #cbb4ff !important;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 10px 15px;
+}
+
+.sidebar .nav .nav-item .nav-link i {
+  color: #b998ff !important;
+  transition: color 0.3s ease;
+}
+
+
+
+
+
+
+.sidebar .nav .nav-item.active > .nav-link {
+  background-color: #6a35b1 !important;
+  color: #fff !important;
+  box-shadow: 0 2px 6px rgba(106, 53, 177, 0.4);
+}
+
+.sidebar .nav .nav-item.active > .nav-link i {
+  color: #ffffff !important;
+}
+
+/* === NAVBAR (TOP) === */
+.navbar.default-layout-navbar {
+  background: linear-gradient(90deg, #3e216d, #5b2fa3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.navbar .navbar-brand-wrapper {
+  background-color: #2c1a47 !important;
+}
+
+.navbar .navbar-brand img {
+  filter: brightness(0) invert(1);
+  height: 38px;
+}
+
+.navbar .nav-profile-text p {
+  color: #f3e5f5 !important;
+  font-weight: 600;
+}
+
+.navbar .nav-item .nav-link {
+  color: #e0d3ff !important;
+  transition: 0.3s;
+}
+
+.navbar .nav-item .nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* === DROPDOWN MENU === */
+.navbar .dropdown-menu {
+  background-color: #3a2561;
+  color: #fff;
+  border: none;
+}
+
+.navbar .dropdown-item {
+  color: #e0d3ff;
+  transition: all 0.2s ease;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #5b2fa3;
+  color: #fff;
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: #2c1a47 !important;
+  color: #cfc3e4 !important;
+  border-top: 1px solid #4b2b78 !important;
+  text-align: center;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6a35b1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7a3ff2;
+}
+
+/* === ANIMASI HOVER HALUS === */
+.sidebar .nav .nav-item .nav-link:hover,
+.sidebar .nav .nav-item.active > .nav-link {
+  transform: translateX(4px);
+  transition: all 0.25s ease;
+}

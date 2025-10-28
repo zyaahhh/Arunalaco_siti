@@ -7,31 +7,49 @@ use App\Models\Penjualan;
 use App\Models\DetailPenjualan;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // === DATA KARTU STATISTIK ===
         $total_penjualan = Penjualan::count();
         $total_barang_terjual = DetailPenjualan::sum('jumlah');
         $total_barang = Barang::count();
         $total_admin = Admin::count();
-        
 
-        
-        $history_terakhir_penjualan = Penjualan::with(['admin', ])
-        ->latest()
-        ->take(5)
-        ->get();
+        // === HISTORY PENJUALAN TERBARU ===
+        $history_terakhir_penjualan = Penjualan::with('admin')
+            ->latest()
+            ->take(5)
+            ->get();
 
         $history_terakhir_detail_penjualan = DetailPenjualan::with(['barang', 'penjualan.admin'])
-        ->latest()
-        ->take(5)
-        ->get();
+            ->latest()
+            ->take(5)
+            ->get();
 
+        // === KOMPOSISI DATA (untuk donut chart) ===
+        $komposisi = [
+            'Penjualan' => $total_penjualan,
+            'Barang Terjual' => $total_barang_terjual,
+            'Barang' => $total_barang,
+            'Admin' => $total_admin,
+        ];
+
+        // === TREND PENJUALAN PER BULAN (6 bulan terakhir) ===
+        $bulan = collect(range(5, 0))->map(function ($i) {
+            return Carbon::now()->subMonths($i)->format('M Y');
+        })->toArray();
+
+        $penjualanPerBulan = collect(range(5, 0))->map(function ($i) {
+            $start = Carbon::now()->subMonths($i)->startOfMonth();
+            $end   = Carbon::now()->subMonths($i)->endOfMonth();
+            return Penjualan::whereBetween('tgl_penjualan', [$start, $end])->count();
+        })->toArray();
+
+        // === KIRIM DATA KE VIEW ===
         return view('home.dashboard', compact(
             'total_penjualan',
             'total_barang_terjual',
@@ -39,56 +57,9 @@ class DashboardController extends Controller
             'total_admin',
             'history_terakhir_penjualan',
             'history_terakhir_detail_penjualan',
-           
+            'komposisi',
+            'bulan',
+            'penjualanPerBulan'
         ));
-     }
-    
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

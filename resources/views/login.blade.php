@@ -42,7 +42,7 @@
       /* === Kolom kiri (gambar) === */
       .login-image {
         flex: 1;
-        background: url('{{ asset('assets/images/faces/imup.png') }}') center center/cover no-repeat;
+        background: url('{{ asset('assets/images/faces/9.jpg') }}') center center/cover no-repeat;
         position: relative;
       }
 

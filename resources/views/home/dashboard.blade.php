@@ -15,10 +15,10 @@
         <!-- Total Penjualan -->
         <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-primary text-white card-box text-center">
-                <div class="card-body position-relative d-flex flex-column align-items-center justify-content-center">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
                     <i class="mdi mdi-cart-outline card-icon"></i>
                     <h2 class="mt-2 mb-1 fw-bold">{{ $total_penjualan }}</h2>
-                    <p class="mb-2">Total Penjualan</p>
+                    <p>Total Penjualan</p>
                     <a href="{{ route('penjualan.index') }}" class="info-link">More info <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             </div>
@@ -27,10 +27,10 @@
         <!-- Total Barang Terjual -->
         <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-success text-white card-box text-center">
-                <div class="card-body position-relative d-flex flex-column align-items-center justify-content-center">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
                     <i class="mdi mdi-package-variant-closed card-icon"></i>
                     <h2 class="mt-2 mb-1 fw-bold">{{ $total_barang_terjual }}</h2>
-                    <p class="mb-2">Total Barang Terjual</p>
+                    <p>Total Barang Terjual</p>
                     <a href="{{ route('detail_penjualan.index') }}" class="info-link">More info <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             </div>
@@ -39,10 +39,10 @@
         <!-- Total Barang -->
         <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-info text-white card-box text-center">
-                <div class="card-body position-relative d-flex flex-column align-items-center justify-content-center">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
                     <i class="mdi mdi-cube-outline card-icon"></i>
                     <h2 class="mt-2 mb-1 fw-bold">{{ $total_barang }}</h2>
-                    <p class="mb-2">Total Barang</p>
+                    <p>Total Barang</p>
                     <a href="{{ route('barang.index') }}" class="info-link">More info <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             </div>
@@ -51,10 +51,10 @@
         <!-- Total Admin -->
         <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-danger text-white card-box text-center">
-                <div class="card-body position-relative d-flex flex-column align-items-center justify-content-center">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
                     <i class="mdi mdi-account-multiple card-icon"></i>
                     <h2 class="mt-2 mb-1 fw-bold">{{ $total_admin }}</h2>
-                    <p class="mb-2">Total Admin</p>
+                    <p>Total Admin</p>
                     <a href="{{ route('admin.index') }}" class="info-link">More info <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             </div>
@@ -136,6 +136,29 @@
             </div>
         </div>
     </div>
+
+    <!-- Grafik Statistik -->
+    <div class="row mt-4">
+        <!-- Donut Chart -->
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Komposisi Data</h4>
+                    <canvas id="komposisiChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Line Chart -->
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Trend Penjualan per Bulan</h4>
+                    <canvas id="trendChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- CSS tambahan -->
@@ -154,7 +177,6 @@
     opacity: 0.4;
 }
 .info-link {
-    display: inline-block;
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -164,3 +186,65 @@
 }
 </style>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/vendors/chart.js/chart.umd.js') }}"></script>
+<script>
+  // === Doughnut Chart: Komposisi Data ===
+  (function(){
+    const el = document.getElementById('komposisiChart');
+    if(!el) return;
+
+    const dataKomposisi = {!! json_encode(array_values($komposisi ?? [])) !!};
+    const labelKomposisi = {!! json_encode(array_keys($komposisi ?? [])) !!};
+
+    new Chart(el, {
+      type: 'doughnut',
+      data: {
+        labels: labelKomposisi,
+        datasets: [{
+          data: dataKomposisi,
+          backgroundColor: ['#9C6BFF','#00C9A7','#FF6B81','#3D8BFF'],
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  })();
+
+  // === Line Chart: Trend Penjualan per Bulan ===
+  (function(){
+    const el = document.getElementById('trendChart');
+    if(!el) return;
+
+    const bulanLabels = {!! json_encode($bulan ?? []) !!};
+    const dataPenjualan = {!! json_encode($penjualanPerBulan ?? []) !!};
+
+    new Chart(el, {
+      type: 'line',
+      data: {
+        labels: bulanLabels,
+        datasets: [{
+          label: 'Total Penjualan',
+          data: dataPenjualan,
+          borderColor: '#00C9A7',
+          backgroundColor: 'rgba(0,201,167,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 } }
+        }
+      }
+    });
+  })();
+</script>
+@endpush

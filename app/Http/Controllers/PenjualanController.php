@@ -86,9 +86,7 @@ class PenjualanController extends Controller
         return redirect()->route('penjualan.index')->with('success', 'Data berhasil dihapus');
     }
 
-   // ===============================
-// CETAK STRUK PENJUALAN
-// ===============================
+ 
 public function cetak($id)
 {
     $penjualan = Penjualan::with(['detail_penjualan.barang'])->findOrFail($id);

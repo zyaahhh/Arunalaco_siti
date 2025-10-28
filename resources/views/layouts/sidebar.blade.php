@@ -2,7 +2,7 @@
   <li class="nav-item nav-profile">
     <a href="#" class="nav-link">
       <div class="nav-profile-image">
-        <img src="{{ asset('assets/images/faces/imup.png') }}" alt="profile" />
+        <img src="{{ asset('assets/images/faces/9.jpg') }}" alt="profile" />
         <span class="login-status online"></span>
       </div>
       <div class="nav-profile-text d-flex flex-column">
